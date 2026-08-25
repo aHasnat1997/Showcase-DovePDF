@@ -1,0 +1,22 @@
+---
+import { reasons } from "../constant/landing-content";
+---
+
+<section class="mx-auto max-w-6xl px-5 py-16 sm:py-24" aria-labelledby="why-title">
+  <div class="text-center reveal">
+    <p class="section-badge">Why Choose Us</p>
+    <h2 id="why-title" class="mt-3 font-jakarta text-3xl font-bold text-slate-900 sm:text-4xl">Built for Simplicity</h2>
+    <p class="mt-3 text-sm text-text-muted sm:text-base">No bloat, no complexity. Just the tools you need, working perfectly.</p>
+  </div>
+  <div id="why-grid" class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {reasons.map((reason, index) => (
+      <article class="reveal bg-white p-5 text-center" style={`transition-delay:${index * 70}ms`}>
+        <div class="w-fit mx-auto rounded-xl bg-primary-100 flex items-center justify-center">
+          <img src={reason.icon} alt={reason.title} class="size-[72px] p-4" />
+        </div>
+        <h3 class="mt-5 font-jakarta text-[18px] font-semibold text-slate-900">{reason.title}</h3>
+        <p class="mt-3 text-[14px] leading-7 text-text-muted">{reason.description}</p>
+      </article>
+    ))}
+  </div>
+</section>

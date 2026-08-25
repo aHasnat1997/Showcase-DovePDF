@@ -1,0 +1,69 @@
+/* PDF Viewer Styles - Fix for text overlap and link issues */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#page1-div,
+div[id^="page"][id$="-div"] {
+  position: relative;
+  overflow: visible;
+  background-color: #A0A0A0;
+}
+
+#page1-div p,
+div[id^="page"][id$="-div"] p {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+a {
+  text-decoration: none !important;
+  position: relative;
+}
+
+a.ft012 {
+  color: #0000ff;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.ft00, .ft01, .ft02, .ft03, .ft04, .ft05, .ft06, .ft07, 
+.ft08, .ft09, .ft010, .ft011, .ft012, .ft013, .ft014, 
+.ft015, .ft016 {
+  font-family: inherit;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+
+.ft010, .ft011 {
+  letter-spacing: -0.015em;
+}
+
+div[id^="page"][id$="-div"] img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+div[id^="page"][id$="-div"] p {
+  position: absolute;
+  z-index: 1;
+}
+
+a[href^="mailto:"],
+a[href^="http"] {
+  color: #0000ff;
+  text-decoration: underline !important;
+}

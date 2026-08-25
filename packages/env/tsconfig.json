@@ -1,0 +1,3 @@
+{
+  "extends": "@acme-pdf/config/tsconfig.base.json"
+}

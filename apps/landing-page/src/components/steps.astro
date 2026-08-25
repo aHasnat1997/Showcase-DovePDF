@@ -1,0 +1,22 @@
+---
+import { steps } from "../constant/landing-content";
+---
+
+<section class="mx-auto max-w-6xl px-5 py-16 sm:py-24" aria-labelledby="steps-title">
+  <div class="text-center reveal">
+    <p class="section-badge">How It Works</p>
+    <h2 id="steps-title" class="mt-3 font-jakarta text-[48px] font-bold text-slate-900">Three Simple Steps</h2>
+    <p class="mt-3 text-[20px] text-text-muted">Get your PDF processed in under 30 seconds. No complexity, no <br /> learning curve.</p>
+  </div>
+  <div id="steps-grid" class="mt-12 grid gap-[32px] md:grid-cols-3">
+    {steps.map((step, index) => (
+      <article class="reveal text-center" style={`transition-delay:${index * 90}ms`}>
+        <div class="w-fit mx-auto rounded-xl bg-primary-100 flex items-center justify-center">
+          <img src={step.icon} alt={step.title} class="size-[72px] p-4" />
+        </div>
+        <h3 class="mt-5 font-jakarta text-[20px] font-semibold text-slate-900">{step.title}</h3>
+        <p class="mt-3 text-[16px] leading-7 text-text-muted">{step.description}</p>
+      </article>
+    ))}
+  </div>
+</section>

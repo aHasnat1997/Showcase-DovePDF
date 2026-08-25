@@ -1,0 +1,32 @@
+---
+import { faqs } from "../constant/landing-content";
+---
+
+<section class="mx-auto max-w-4xl px-5 py-16 sm:py-24" aria-labelledby="faq-title">
+  <div class="text-center reveal">
+    <p class="section-badge">FAQ</p>
+    <h2 id="faq-title" class="mt-3 font-jakarta text-[48px] font-bold text-slate-900 sm:text-4xl">Frequently Asked Questions</h2>
+    <p class="mt-4 text-[17px] leading-7 text-text-muted">Quick answers to the most common questions about AcmePDF.</p>
+  </div>
+  <div id="faq-list" class="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+    {faqs.map((item, index) => (
+      <article class="border-b border-slate-100 last:border-0">
+        <button class="faq-toggle flex w-full items-center justify-between px-5 py-4 text-left text-[18px] font-semibold text-slate-800 sm:px-6" type="button" aria-expanded={index === 0 ? "true" : "false"}>
+          {item.q}
+          <span class="text-xl text-slate-400">{index === 0 ? "−" : "+"}</span>
+        </button>
+        <div class={`faq-content overflow-hidden px-5 sm:px-6 ${index === 0 ? "open" : ""}`}>
+          <p class="pb-5 text-[16px] leading-7 text-text-muted">{item.a}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="mt-8 flex justify-center reveal">
+    <a href="/faq.html" class="inline-flex items-center gap-2 rounded-xl border-2 border-brand-600 px-6 py-3 text-sm font-semibold text-brand-600 transition-all duration-200 hover:bg-brand-600 hover:text-white">
+      View All FAQs
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </div>
+</section>

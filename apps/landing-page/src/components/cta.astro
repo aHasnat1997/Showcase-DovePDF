@@ -1,0 +1,34 @@
+---
+import GoogleAdStrip from "./google-ad-strip.astro"
+---
+
+<section
+  class="mx-auto max-w-6xl px-5 py-16 sm:py-20"
+  aria-labelledby="cta-title"
+>
+  <div
+    class="reveal rounded-2xl bg-gradient-to-r from-brand-500 to-indigo-700 px-6 py-14 text-center shadow-xl shadow-brand-200/40 sm:px-10"
+  >
+    <h2 id="cta-title" class="font-jakarta text-[48px] font-bold text-white">
+      Ready to Get Started?
+    </h2>
+    <p class="mx-auto mt-3 max-w-2xl text-[20px] text-white!">
+      Start processing your PDFs for free. No sign-up, no downloads — just
+      results.
+    </p>
+    <a
+      href="https://editor.acmepdf.com"
+      data-editor-link
+      class="mt-8 inline-flex gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand-600 transition hover:bg-slate-100"
+    >
+      <img src="/svgs/SVG-6.svg" alt="" class="size-[20px]" />
+      Upload Your PDF
+    </a>
+  </div>
+
+  <div class="mt-16">
+    <GoogleAdStrip
+      placement="cta"
+    />
+  </div>
+</section>

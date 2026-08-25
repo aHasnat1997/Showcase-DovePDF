@@ -1,0 +1,11 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+    environment:
+      CORS_ORIGIN: http://localhost:5050
+      NODE_ENV: production

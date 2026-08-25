@@ -1,0 +1,21 @@
+---
+interface Props {
+  placement: "hero" | "cta";
+  fallbackLabel?: string;
+  className?: string;
+}
+
+const {
+  placement,
+  fallbackLabel = "ADVERTISEMENT",
+  className = "",
+} = Astro.props as Props;
+---
+
+<div
+  class:list={["ad-strip", className]}
+  data-landing-ad={placement}
+  aria-label="Advertisement"
+>
+  <span>{fallbackLabel}</span>
+</div>

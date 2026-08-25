@@ -1,0 +1,33 @@
+---
+import { features } from "../constant/landing-content";
+---
+
+<section class="mx-auto max-w-6xl space-y-16 px-5 py-16 sm:space-y-20 sm:py-24" aria-labelledby="features-title">
+  <h2 id="features-title" class="sr-only">Feature highlights</h2>
+  <div id="features-list" class="space-y-16 sm:space-y-20">
+    {features.map((feature, index) => (
+      <article class={`feature-row grid items-center gap-[64px] ${feature.reverse ? "md:grid-cols-[1fr_1.1fr]" : "md:grid-cols-[1.1fr_1fr]"}`} style={`transition-delay:${index * 80}ms`}>
+        <section class={`feature-left ${feature.reverse ? "md:order-2" : ""}`}>
+          <p class="section-badge">{feature.badge}</p>
+          <h3 class="mt-4 font-jakarta text-[36px] font-bold text-slate-900">
+            {feature.title} <span class="text-primary">{feature.highlight}</span>
+          </h3>
+          <p class="mt-4 max-w-xl text-[18px] leading-7 text-text-muted">{feature.description}</p>
+          <ul class="mt-6 space-y-3">
+            {feature.points.map(point => (
+              <li class="flex items-center gap-2 text-[18px] text-slate-700">
+                <img src="/svgs/SVG-7.svg" alt="" class="size-[16px]" />{point}
+              </li>
+            ))}
+          </ul>
+          <a href="https://editor.acmepdf.com" data-editor-link class="mt-7 inline-flex items-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90 gap-2">
+            {feature.cta} <img src="/svgs/SVG-11w.svg" alt="" class="size-[16px]" />
+          </a>
+        </section>
+        <section class={`feature-right rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 to-slate-100 p-6 ${feature.reverse ? "md:order-1" : ""}`}>
+          <img src={`/${feature.image}`} alt={feature.title} class="w-full h-auto" />
+        </section>
+      </article>
+    ))}
+  </div>
+</section>

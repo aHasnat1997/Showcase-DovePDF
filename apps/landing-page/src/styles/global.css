@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-sans: var(--font-inter);
+
+  --color-primary: #3b82f6;
+  --color-primary-100: #e0e7ff;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+
+  --color-text: #0f1729;
+  --color-text-muted: #64748b;
+
+  --color-border: #e2e8f0;
+}
+
+html,
+body,
+#page-root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+  color: var(--color-text);
+  font-family: var(--font-inter);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-jakarta);
+}
+
+p {
+  color: var(--color-text-muted);
+}
+
+.section-badge {
+  display: inline-flex;
+  border-radius: 9999px;
+  background: var(--color-primary-100);
+  padding: 0.25rem 0.75rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-brand-600);
+}
+
+.ad-strip {
+  display: flex;
+  min-height: 58px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background-color: #f8fafc;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #94a3b8;
+}
+
+.ad-strip .adsbygoogle {
+  width: 100%;
+  min-height: 58px;
+}
+
+.ripple-surface {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.click-ripple {
+  position: absolute;
+  z-index: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  background: color-mix(in srgb, currentColor 26%, transparent);
+  animation: click-ripple-wave 650ms ease-out forwards;
+}
+
+@keyframes click-ripple-wave {
+  0% {
+    opacity: 0.42;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.faq-content {
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.32s ease;
+  will-change: max-height, opacity;
+}
+
+.faq-content.open {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+  }
+
+  .faq-content {
+    transition: none;
+  }
+
+  .click-ripple {
+    animation: none;
+  }
+}

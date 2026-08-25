@@ -1,0 +1,43 @@
+---
+import GoogleAdStrip from "./google-ad-strip.astro"
+---
+
+<header class="bg-gradient-to-b from-primary/10 to-white/60">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 pb-20 pt-8 md:grid-cols-2 md:items-center md:pb-24 md:pt-12">
+    <section id="hero-left" aria-labelledby="hero-title">
+      <p
+        class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[14px] font-semibold text-primary!">
+        <span class="size-[8px] rounded-full bg-primary"></span> Free to Use —
+        No Sign-up required
+      </p>
+      <h1 id="hero-title" class="mt-4 font-jakarta text-[72px] font-bold tracking-tight text-slate-900">
+        Edit PDFs <span class="text-primary">Fast.</span>
+      </h1>
+      <p class="mt-4 max-w-md text-[20px] leading-7 text-text-muted">
+        Easily edit, merge, and compress your PDF documents online. Simple tools
+        that just work — no downloads, no hassle.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="https://editor.acmepdf.com" data-editor-link
+          class="rounded-xl bg-primary px-5 py-3 text-[14px] font-semibold text-white transition hover:bg-primary/90 flex items-center gap-2">
+          <img src="/svgs/upload.svg" alt="" class="size-[16px]" />
+          Upload your PDF
+        </a>
+        <a href="#popular-tools"
+          class="rounded-xl bg-orange-500 px-5 py-3 text-[14px] font-semibold text-white transition hover:border-slate-400 flex items-center gap-2">
+          Explore All Tools
+        </a>
+      </div>
+    </section>
+
+    <section id="hero-visual" class="relative">
+      <img src="/Container.png" alt="" class="floating-card" />
+    </section>
+  </div>
+
+  <div class="mx-auto max-w-5xl px-5 pb-16">
+    <GoogleAdStrip
+      placement="hero"
+    />
+  </div>
+</header>

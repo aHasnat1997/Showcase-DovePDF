@@ -1,0 +1,195 @@
+---
+import Layout from "../../layouts/root.astro";
+---
+
+<Layout>
+  <section class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+    <!-- Header -->
+    <div class="mb-12 text-center reveal">
+      <span class="section-badge">📬 Get In Touch</span>
+      <h1 class="mt-4 font-jakarta text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+        Contact Us
+      </h1>
+      <p class="mt-3 text-text-muted">
+        Have a question or feedback? We'd love to hear from you.
+      </p>
+    </div>
+
+    <div class="grid gap-12 md:grid-cols-2 md:items-start">
+      <!-- LEFT: Image collage + contact info + socials -->
+      <div class="reveal">
+        <!-- Image collage -->
+        <div class="grid grid-cols-1 gap-3 rounded-2xl overflow-hidden">
+          <!-- <img
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop&q=80"
+            alt="Office"
+            class="h-48 w-full object-cover rounded-xl"
+          /> -->
+          <img
+            src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&auto=format&fit=crop&q=80"
+            alt="Team"
+            class="h-48 w-full object-cover rounded-xl"
+          />
+        </div>
+
+        <!-- Contact info -->
+        <ul class="mt-8 space-y-5">
+          <li class="flex items-start gap-4">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <!-- Location icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 13 6 13s6-7.75 6-13c0-3.314-2.686-6-6-6zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Address</p>
+              <p class="text-sm text-text-muted">123 PDF Street, Suite 100<br />New York, NY 10001</p>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <!-- Phone icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5.5A2.5 2.5 0 0 1 5.5 3h.879a1 1 0 0 1 .949.684l1.03 3.09a1 1 0 0 1-.23 1.05L6.91 9.05a11.05 11.05 0 0 0 4.04 4.04l1.226-1.218a1 1 0 0 1 1.05-.23l3.09 1.03A1 1 0 0 1 17 13.62v.88A2.5 2.5 0 0 1 14.5 17C8.149 17 3 11.851 3 5.5z"/>
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Phone</p>
+              <a href="tel:+12345678900" class="text-sm text-text-muted hover:text-primary transition">+1 (234) 567-8900</a>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <!-- Email icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/>
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Email</p>
+              <a href="mailto:hello@example.com" class="text-sm text-text-muted hover:text-primary transition">hello@example.com</a>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Social icons -->
+        <div class="mt-8 flex items-center gap-3">
+          {[
+            {
+              label: "Twitter",
+              href: "https://x.com/",
+              path: "M18.9 2H22l-6.8 7.8L23.2 22h-6.9l-5.4-6.9L5 22H2l7.4-8.5L.8 2h7l5 6.4L18.9 2Zm-1.2 18h1.8L7.1 3.9H5.2L17.7 20Z",
+            },
+            {
+              label: "Instagram",
+              href: "https://www.instagram.com/",
+              path: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 3.3A4.7 4.7 0 1 1 7.3 12 4.7 4.7 0 0 1 12 7.3Zm0 2A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3ZM17.8 6.2a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z",
+            },
+            {
+              label: "Facebook",
+              href: "https://www.facebook.com/",
+              path: "M13.5 22v-8.1h2.7l.4-3.1h-3.1V8.8c0-.9.3-1.5 1.5-1.5h1.7V4.6c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.6v1.8H7v3.1h2.7V22h3.8Z",
+            },
+          ].map(({ label, href, path }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-primary hover:text-primary"
+            >
+              <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true">
+                <path d={path} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- RIGHT: Contact form -->
+      <div class="reveal">
+        <form id="contact-form" class="space-y-4" novalidate>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div class="relative">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+              />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Number"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+          />
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <input
+              type="text"
+              name="city"
+              placeholder="City"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+            />
+            <input
+              type="text"
+              name="state"
+              placeholder="State"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
+          <textarea
+            name="message"
+            placeholder="Message"
+            rows="5"
+            required
+            class="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+          ></textarea>
+
+          <button
+            type="submit"
+            class="rounded-xl bg-primary px-8 py-3 text-sm font-semibold text-white transition hover:bg-primary/90 active:scale-95"
+          >
+            SEND MESSAGE
+          </button>
+
+          <p id="form-status" class="hidden text-sm font-medium"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status") as HTMLParagraphElement;
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    status.textContent = "✅ Message sent! We'll get back to you soon.";
+    status.className = "text-sm font-medium text-green-600";
+    status.classList.remove("hidden");
+    form.reset();
+  });
+</script>

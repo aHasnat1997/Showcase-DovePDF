@@ -1,0 +1,416 @@
+---
+import "@/styles/global.css"
+import Nav from "../components/nav.astro"
+import Footer from "../components/footer.astro"
+import { ClientRouter } from "astro:transitions"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>AcmePDF - Free Online PDF Editor | Dove PDF Tools</title>
+    <meta name="description" content="Dove PDF — free online tools to edit, merge, compress and convert PDF files. No download needed. Fast and secure." />
+    <meta name="keywords" content="dove pdf, acmepdf, pdf editor, merge pdf, compress pdf, online pdf tools" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="AcmePDF" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AcmePDF - Edit PDFs Fast" />
+    <meta property="og:description" content="Simple online PDF tools to edit, merge, and compress your files with speed." />
+    <meta property="og:url" content="https://acmepdf.com" />
+    <meta property="og:image" content="https://acmepdf.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AcmePDF - Edit PDFs Fast" />
+    <meta name="twitter:description" content="Edit, merge, and compress PDF documents online with no hassle." />
+    <meta name="twitter:image" content="https://acmepdf.com/og-image.png" />
+    <link rel="canonical" href="https://acmepdf.com" />
+    <script is:inline src="/runtime-config.js"></script>
+
+    <ClientRouter />
+  </head>
+  <body>
+    <Nav />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      declare global {
+        interface Window {
+          __LANDING_CONFIG__?: Record<string, string>;
+          dataLayer: unknown[];
+          gtag: (...args: unknown[]) => void;
+          adsbygoogle: unknown[];
+        }
+      }
+
+      function getLandingConfig(): Record<string, string> {
+        return (window.__LANDING_CONFIG__ as Record<string, string>) || {};
+      }
+
+      function ensureScriptOnce(scriptId: string, src: string, attributes?: Record<string, string>): Promise<void> {
+        return new Promise((resolve, reject) => {
+          if (document.getElementById(scriptId)) {
+            resolve();
+            return;
+          }
+
+          const script = document.createElement("script");
+          script.id = scriptId;
+          script.async = true;
+          script.src = src;
+
+          if (attributes) {
+            Object.entries(attributes).forEach(([key, value]) => {
+              script.setAttribute(key, value);
+            });
+          }
+
+          script.addEventListener("load", () => resolve(), { once: true });
+          script.addEventListener("error", () => reject(new Error(`Failed to load script: ${src}`)), { once: true });
+          document.head.appendChild(script);
+        });
+      }
+
+      function applyEditorLinks() {
+        const { editorUrl } = getLandingConfig();
+        if (!editorUrl) return;
+
+        document.querySelectorAll<HTMLAnchorElement>("[data-editor-link]").forEach((anchor) => {
+          anchor.href = editorUrl;
+        });
+      }
+
+      function bootstrapGoogle() {
+        const {
+          gtmId,
+          gaMeasurementId,
+          adsenseClientId,
+          adsenseSlotHero,
+          adsenseSlotCta,
+        } = getLandingConfig();
+
+        const activeGaMeasurementId = gaMeasurementId || "";
+        const activeAdsenseClientId = adsenseClientId || "";
+        const activeSlots = {
+          hero: adsenseSlotHero || "",
+          cta: adsenseSlotCta || "",
+        };
+
+        if (activeGaMeasurementId) {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag =
+            window.gtag ||
+            function gtag() {
+              window.dataLayer.push(arguments);
+            };
+
+          window.gtag("js", new Date());
+          window.gtag("config", activeGaMeasurementId, {
+            anonymize_ip: true,
+            send_page_view: false,
+          });
+
+          void ensureScriptOnce(
+            "ga4-script",
+            `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(activeGaMeasurementId)}`,
+          ).catch((error) => {
+            console.warn("GA script failed to load", error);
+          });
+        } else if (gtmId) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            "gtm.start": new Date().getTime(),
+            event: "gtm.js",
+          });
+          void ensureScriptOnce(
+            "gtm-script",
+            `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`,
+          ).catch((error) => {
+            console.warn("GTM script failed to load", error);
+          });
+        }
+
+        const landingAds = Array.from(
+          document.querySelectorAll("[data-landing-ad]"),
+        );
+
+        if (activeAdsenseClientId && landingAds.length > 0) {
+          window.adsbygoogle = window.adsbygoogle || [];
+
+          landingAds.forEach((el) => {
+            const ad = el as HTMLElement;
+            const placement = ad.dataset.landingAd;
+            const slot =
+              placement === "hero" ? activeSlots.hero : activeSlots.cta;
+
+            if (!slot || ad.dataset.adsenseRendered === "true") return;
+
+            ad.innerHTML = `
+              <ins
+                class="adsbygoogle"
+                style="display:block"
+                data-ad-client="${activeAdsenseClientId}"
+                data-ad-slot="${slot}"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+                aria-label="Advertisement"
+              ></ins>
+            `;
+
+            ad.dataset.adsenseRendered = "true";
+          });
+
+          void ensureScriptOnce(
+            "adsense-script",
+            `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(activeAdsenseClientId)}`,
+            { crossorigin: "anonymous" },
+          )
+            .then(() => {
+              document.querySelectorAll("ins.adsbygoogle").forEach(() => {
+                try {
+                  window.adsbygoogle.push({});
+                } catch (error) {
+                  console.warn("AdSense slot render failed", error);
+                }
+              });
+            })
+            .catch((error) => {
+              console.warn("AdSense script failed to load", error);
+            });
+
+          let meta = document.querySelector('meta[name="google-adsense-account"]');
+          if (!meta) {
+            meta = document.createElement("meta");
+            meta.setAttribute("name", "google-adsense-account");
+            document.head.appendChild(meta);
+          }
+          meta.setAttribute("content", activeAdsenseClientId);
+        }
+
+        if (activeGaMeasurementId) {
+          window.gtag("event", "page_view", {
+            page_path:
+              window.location.pathname +
+              window.location.search +
+              window.location.hash,
+            page_location: window.location.href,
+            page_title: document.title,
+          });
+        }
+      }
+
+      function expandFaqContent(content: HTMLElement) {
+        content.classList.add("open");
+        content.style.maxHeight = `${content.scrollHeight}px`;
+      }
+
+      function collapseFaqContent(content: HTMLElement) {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        // Force reflow so the browser registers the explicit height before animating to 0
+        void content.offsetHeight;
+        content.classList.remove("open");
+        content.style.maxHeight = "0px";
+      }
+
+      function initFaq() {
+        const container = document.querySelector("#faq-list");
+        if (!container) return;
+        const firstOpen = container.querySelector(".faq-content.open") as HTMLElement | null;
+        if (firstOpen) firstOpen.style.maxHeight = `${firstOpen.scrollHeight}px`;
+        container.querySelectorAll<HTMLElement>(".faq-toggle").forEach((button) => {
+          if (button.dataset.faqBound === "true") return;
+          button.dataset.faqBound = "true";
+          button.addEventListener("click", () => {
+            const article = button.closest("article");
+            if (!article) return;
+            container.querySelectorAll("article").forEach((item) => {
+              const btn = item.querySelector(".faq-toggle");
+              const content = item.querySelector(".faq-content") as HTMLElement | null;
+              const icon = btn?.querySelector("span");
+              if (!btn || !content || !icon) return;
+              const isCurrent = item === article;
+              const shouldOpen = btn.getAttribute("aria-expanded") !== "true" && isCurrent;
+              btn.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+              icon.textContent = shouldOpen ? "−" : "+";
+              if (shouldOpen) expandFaqContent(content);
+              else collapseFaqContent(content);
+            });
+          });
+        });
+      }
+
+      function createClickRipple(event: MouseEvent, element: HTMLElement) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const rect = element.getBoundingClientRect();
+        const ripple = document.createElement("span");
+        ripple.className = "click-ripple";
+        const rippleSize = Math.max(rect.width, rect.height) * 1.8;
+        const x = event.detail === 0 ? rect.width / 2 : event.clientX - rect.left;
+        const y = event.detail === 0 ? rect.height / 2 : event.clientY - rect.top;
+        ripple.style.cssText = `width:${rippleSize}px;height:${rippleSize}px;left:${x}px;top:${y}px`;
+        element.appendChild(ripple);
+        ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+      }
+
+      function initClickRipple() {
+        document.querySelectorAll<HTMLElement>("button, a[href]").forEach((el) => {
+          if (el.dataset.rippleBound === "true") return;
+          el.dataset.rippleBound = "true";
+          el.classList.add("ripple-surface");
+          el.addEventListener("click", (e) => createClickRipple(e, el));
+        });
+      }
+
+      function initAnimations() {
+        const floatingCard = document.querySelector(".floating-card");
+        if (floatingCard) {
+          floatingCard.animate(
+            [
+              { transform: "translateY(0px)" },
+              { transform: "translateY(-8px)" },
+              { transform: "translateY(0px)" },
+            ],
+            { duration: 4500, iterations: Infinity, easing: "ease-in-out" },
+          );
+        }
+
+        const heroItems = Array.from(document.querySelectorAll("#hero-left > *"));
+        heroItems.forEach((el, i) => {
+          el.animate(
+            [
+              { opacity: 0, transform: "translateY(20px)" },
+              { opacity: 1, transform: "translateY(0)" },
+            ],
+            { duration: 600, delay: i * 120, easing: "ease-out", fill: "forwards" },
+          );
+        });
+
+        const heroVisual = document.querySelector("#hero-visual .floating-card");
+        if (heroVisual) {
+          heroVisual.animate(
+            [
+              { opacity: 0, transform: "translateX(42px) translateY(12px)" },
+              { opacity: 1, transform: "translateX(0) translateY(0)" },
+            ],
+            { duration: 700, delay: 200, easing: "ease-out", fill: "forwards" },
+          );
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target as HTMLElement;
+              if (el.dataset.animated === "true") return;
+              el.dataset.animated = "true";
+              el.animate(
+                [
+                  { opacity: 0, transform: "translateY(24px)" },
+                  { opacity: 1, transform: "translateY(0)" },
+                ],
+                { duration: 550, easing: "ease-out", fill: "forwards" },
+              ).onfinish = () => {
+                el.style.opacity = "1";
+              };
+              observer.unobserve(el);
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+        ["#tools-grid", "#steps-grid", "#why-grid"].forEach((selector) => {
+          const grid = document.querySelector(selector);
+          if (!grid) return;
+          const gridObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const cards = Array.from(entry.target.querySelectorAll<HTMLElement>("article"));
+                cards
+                  .filter((card) => card.dataset.animated !== "true")
+                  .forEach((card, i) => {
+                    card.dataset.animated = "true";
+                    card.animate(
+                      [
+                        { opacity: 0, transform: "translateY(36px)" },
+                        { opacity: 1, transform: "translateY(0)" },
+                      ],
+                      {
+                        duration: 550,
+                        delay: i * 100,
+                        easing: "ease-out",
+                        fill: "forwards",
+                      },
+                    ).onfinish = () => {
+                      card.style.opacity = "1";
+                    };
+                  });
+                gridObserver.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.1 },
+          );
+          gridObserver.observe(grid);
+        });
+
+        const featureObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const row = entry.target as HTMLElement;
+              if (row.dataset.animated === "true") return;
+              row.dataset.animated = "true";
+              const left = row.querySelector(".feature-left") as HTMLElement | null;
+              const right = row.querySelector(".feature-right") as HTMLElement | null;
+              if (left) {
+                left.animate(
+                  [
+                    { opacity: 0, transform: "translate(-22px, 24px)" },
+                    { opacity: 1, transform: "translate(0, 0)" },
+                  ],
+                  { duration: 600, easing: "ease-out", fill: "forwards" },
+                ).onfinish = () => {
+                  left.style.opacity = "1";
+                };
+              }
+              if (right) {
+                right.animate(
+                  [
+                    { opacity: 0, transform: "translate(22px, 24px)" },
+                    { opacity: 1, transform: "translate(0, 0)" },
+                  ],
+                  { duration: 600, delay: 120, easing: "ease-out", fill: "forwards" },
+                ).onfinish = () => {
+                  right.style.opacity = "1";
+                };
+              }
+              featureObserver.unobserve(row);
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".feature-row").forEach((row) =>
+          featureObserver.observe(row),
+        );
+      }
+
+      function initLanding() {
+        applyEditorLinks();
+        initFaq();
+        initClickRipple();
+        initAnimations();
+        bootstrapGoogle();
+      }
+
+      document.addEventListener("astro:page-load", initLanding);
+    </script>
+  </body>
+</html>
