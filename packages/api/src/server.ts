@@ -886,8 +886,7 @@ async function startServer() {
 </head>
 <body>
   <div class="card">
-    <div class="icon">🕊️</div>
-    <h1>Dove PDF API</h1>
+    <h1>Acme PDF API</h1>
     <p>PDF processing & conversion service</p>
     <div class="badge"><div class="dot"></div> Operational</div>
     <div class="endpoints">
@@ -986,8 +985,7 @@ async function startServer() {
 </head>
 <body>
   <div class="card">
-    <div class="icon">🕊️</div>
-    <h1>Dove PDF API</h1>
+    <h1>Acme PDF API</h1>
     <p class="subtitle">System Health</p>
     <div class="badge"><div class="dot"></div> All systems operational</div>
     <div class="stats">

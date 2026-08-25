@@ -43,17 +43,17 @@ export function TopBar({
   };
 
   return (
-    <header className="flex items-center justify-between border-b border-[#e4e6ec] bg-white px-[14px]">
-      <div className="flex items-center gap-[10px]">
+    <header className="flex items-center justify-between border-b border-[#e4e6ec] bg-white px-3.5">
+      <div className="flex items-center gap-2.5">
         <a href={`${import.meta.env.VITE_SERVER_URL || "/"}`}>
-          <Logo />
+          <Logo className="size-8" />
         </a>
 
         {fileName ? (
           <>
             <div
               key={fileName}
-              className="ml-[3px] flex items-center border-l border-slate-200 pl-[10px]"
+              className="ml-0.75 flex items-center border-l border-slate-200 pl-2.5"
             >
               <input
                 defaultValue={fileName}
@@ -67,7 +67,7 @@ export function TopBar({
                     event.currentTarget.blur();
                   }
                 }}
-                className="h-7 min-w-[220px] rounded-md border border-slate-200 bg-slate-50 px-2.5 text-xs text-slate-600 outline-none focus:border-blue-400"
+                className="h-7 min-w-55 rounded-md border border-slate-200 bg-slate-50 px-2.5 text-xs text-slate-600 outline-none focus:border-blue-400"
                 aria-label="Export file name"
               />
             </div>
